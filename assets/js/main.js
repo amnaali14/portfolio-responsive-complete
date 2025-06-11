@@ -1,57 +1,58 @@
-/*===== MENU SHOW =====*/ 
-const showMenu = (toggleId, navId) =>{
-    const toggle = document.getElementById(toggleId),
-    nav = document.getElementById(navId)
+// Navigation Toggle
+const navToggle = document.getElementById('nav-toggle');
+const navMenu = document.getElementById('nav-menu');
 
-    if(toggle && nav){
-        toggle.addEventListener('click', ()=>{
-            nav.classList.toggle('show')
-        })
-    }
-}
-showMenu('nav-toggle','nav-menu')
+navToggle.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+});
 
-/*==================== REMOVE MENU MOBILE ====================*/
-const navLink = document.querySelectorAll('.nav__link')
-
-function linkAction(){
-    const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
-    navMenu.classList.remove('show')
-}
-navLink.forEach(n => n.addEventListener('click', linkAction))
-
-/*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
-const sections = document.querySelectorAll('section[id]')
-
-const scrollActive = () =>{
-    const scrollDown = window.scrollY
-
-  sections.forEach(current =>{
-        const sectionHeight = current.offsetHeight,
-              sectionTop = current.offsetTop - 58,
-              sectionId = current.getAttribute('id'),
-              sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
-        
-        if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
-            sectionsClass.classList.add('active-link')
-        }else{
-            sectionsClass.classList.remove('active-link')
-        }                                                    
-    })
-}
-window.addEventListener('scroll', scrollActive)
-
-/*===== SCROLL REVEAL ANIMATION =====*/
+// Scroll Reveal
 const sr = ScrollReveal({
     origin: 'top',
     distance: '60px',
     duration: 2000,
     delay: 200,
-//     reset: true
 });
 
-sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
-sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
-sr.reveal('.home__social-icon',{ interval: 200}); 
-sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+// Reveal Sections
+sr.reveal('.home__data, .about__data, .skills__data, .projects__container, .contact__container, .footer');
+sr.reveal('.home__img, .about__img, .skills__img', {delay: 400});
+sr.reveal('.skills__item, .work__img, .contact__form', {interval: 200});
+
+
+const contactForm = document.getElementById('contact-form');
+contactForm.addEventListener('submit', (e) => {
+    const name = document.querySelector('input[name="name"]').value.trim();
+    const email = document.querySelector('input[name="email"]').value.trim();
+    const message = document.querySelector('textarea[name="message"]').value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name || !email || !message) {
+       
+        alert('Please fill out all fields.');
+    } else if (!emailRegex.test(email)) {
+        e.preventDefault();
+        alert('Please enter a valid email address.');
+    } else {
+        alert(`Thank you, ${name}! Your message is being sent.`);
+    }
+});
+// Dynamic Date and Time
+function updateDateTime() {
+    const datetimeElement = document.getElementById('datetime');
+    const now = new Date();
+    const options = {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Asia/Karachi', // PKT time zone
+        hour12: true
+    };
+    datetimeElement.textContent = `Last Updated: ${now.toLocaleString('en-US', options)} PKT`;
+}
+
+updateDateTime(); // Initial call
+setInterval(updateDateTime, 60000); // Update every minute
