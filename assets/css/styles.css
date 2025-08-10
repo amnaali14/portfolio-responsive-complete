@@ -68,8 +68,12 @@ body {
     transition: color 0.3s;
 }
 
-.nav__link:hover, .active-link {
+.nav__link:hover {
+    color: #e75480;
+}
+.active-link {
     color: #000;
+    border-bottom: 2px solid #e75480;
 }
 
 .nav__toggle {
@@ -216,11 +220,20 @@ body {
 .about__container {
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
+    gap: 2rem;
+}
+
+.about__img {
+    display: flex;
+    justify-content: center;
 }
 
 .about__img img {
     width: 100%;
-    border-radius: 10px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
 }
 
 .about__data {
@@ -308,7 +321,9 @@ body {
 
 /* Projects */
 .projects__container {
-    text-align: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
 
 .project-card {
@@ -317,6 +332,14 @@ body {
     border-radius: 10px;
     margin-bottom: 2rem;
     text-align: left;
+    border: 1px solid #f0d6e3;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.08);
 }
 
 .project__title {
@@ -349,6 +372,21 @@ body {
 
 .project__details a:hover {
     text-decoration: underline;
+}
+
+.project__thumb {
+    width: 100%;
+    height: 160px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+    background: #fff;
+    border: 1px solid #f0d6e3;
+}
+.project__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Contact */
@@ -452,7 +490,7 @@ body {
 }
 
 .footer__icon:hover {
-    color: #000;
+    color: #e75480;
 }
 
 .footer__copy {
@@ -485,4 +523,9 @@ body {
 .skills__git {
     width: 85%;
     background-color: #000;
+}
+
+.button:focus {
+    outline: 2px solid #e75480;
+    outline-offset: 2px;
 }
