@@ -292,7 +292,7 @@ body {
 }
 
 .skills__python {
-    width: 70%;
+    width: 80%;
     background-color: #FFC107;
 }
 
@@ -465,3 +465,10 @@ body {
     color: #b0b0b0;
     margin-bottom: 1rem;
 }
+
+/* Additional skill bars */
+.skills__ts { width: 95%; background-color: #FFC107; }
+.skills__react { width: 85%; background-color: #FFC107; }
+.skills__tailwind { width: 90%; background-color: #FFC107; }
+.skills__node { width: 75%; background-color: #FFC107; }
+.skills__git { width: 85%; background-color: #FFC107; }
